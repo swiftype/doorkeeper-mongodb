@@ -19,7 +19,7 @@ module Doorkeeper
 
     def self.authorized_for(resource_owner)
       ids = AccessToken.where(resource_owner_id: resource_owner.id, revoked_at: nil).map(&:application_id)
-      find(ids)
+      where(:_id.in => ids)
     end
   end
 end
